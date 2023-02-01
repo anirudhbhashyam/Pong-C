@@ -11,3 +11,7 @@ $ bash pack.sh main.c
 - `SDL2`
 - `SDL_TTF`
 
+# TODO
+- Refactor.
+- Add a menu screen.
+
