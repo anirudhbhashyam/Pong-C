@@ -4,7 +4,8 @@ A simple implementation of the classic arcade game, Pong, in C.
 # Usage
 ```bash
 $ git clone git@github.com/anirudhbhashyam/Pong-C
-$ bash pack.sh main.c
+$ bash pack.sh 
+$ ./app
 ```
 
 # Dependencies
@@ -12,6 +13,5 @@ $ bash pack.sh main.c
 - `SDL_TTF`
 
 # TODO
-- Refactor.
 - Add a menu screen.
 
