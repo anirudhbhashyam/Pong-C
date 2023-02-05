@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <time.h>
 #include <SDL2/SDL.h>
 #include "window.h"
 #include "objects.h"
@@ -12,6 +13,6 @@
 
 void regulate_fps(const uint32_t);
 void update_score(SDL_Window*, Ball*, int32_t*, int32_t*);
-void run();
+void run(void);
 
 #endif // GAME_H

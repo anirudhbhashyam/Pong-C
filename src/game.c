@@ -26,7 +26,7 @@ void update_score(SDL_Window* window, Ball* ball, int32_t* left_score, int32_t* 
 }
 
 
-void run()
+void run(void)
 {
     sdl_err_handle(SDL_Init(SDL_INIT_VIDEO), SDL_GetError());
 
@@ -101,7 +101,7 @@ void run()
         .h = 50
     };
 
-    Vec2i ball_velocity = vec2i(1, 1);
+    Vec2i ball_velocity = vec2i(2, 2);
 
     Ball ball = {
         vec2i(400, 300),
