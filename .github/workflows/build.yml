@@ -32,6 +32,9 @@ jobs:
           fi
         shell: bash
 
+      - name: Setup SDL2
+        run: sudo cp -R ./_lib/* /usr/lib/pkgconfig
+
       - name: Build
         run: |
           chmod +x pack.sh
