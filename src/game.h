@@ -11,6 +11,14 @@
 #define FPS 240
 #define BACKGROUND_COLOR 0x202020
 
+typedef enum 
+{
+    GameState_Start = 0,
+    GameState_Play,
+    GameState_Pause,
+    GameState_Quit
+} GameState;
+
 void regulate_fps(const uint32_t);
 void update_score(SDL_Window*, Ball*, int32_t*, int32_t*);
 void run(void);

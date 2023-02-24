@@ -25,7 +25,6 @@ void update_score(SDL_Window* window, Ball* ball, int32_t* left_score, int32_t* 
     }
 }
 
-
 void run(void)
 {
     sdl_err_handle(SDL_Init(SDL_INIT_VIDEO), SDL_GetError());
@@ -64,6 +63,16 @@ void run(void)
         ),
         SDL_GetError()
     );
+
+    const char* start_game_text = "Press 'p' to start the game.";
+    Vec2i start_game_text_pos = vec2i(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    Vec2i start_game_text_dim = vec2i(500, 35);
+    SDL_Rect start_game_rect = {
+        .x = start_game_text_pos.x - start_game_text_dim.x / 2,
+        .y = start_game_text_pos.y - start_game_text_dim.y / 2,
+        .w = start_game_text_dim.x,
+        .h = start_game_text_dim.y
+    };
     
     SDL_Rect left_paddle = {
         .x = 0,
@@ -101,7 +110,7 @@ void run(void)
         .h = 50
     };
 
-    Vec2i ball_velocity = vec2i(2, 2);
+    Vec2i ball_velocity = vec2i(1, 1);
 
     Ball ball = {
         vec2i(400, 300),
@@ -116,6 +125,8 @@ void run(void)
 
     uint32_t start;
 
+    GameState game_state = GameState_Start;
+
     while (running)
     {
         start = SDL_GetTicks();
@@ -126,6 +137,7 @@ void run(void)
             {
                 case SDL_QUIT:
                     running = 0;
+                    game_state = GameState_Quit;
                     break; 
 
                 case SDL_KEYDOWN:
@@ -146,6 +158,9 @@ void run(void)
                         case SDLK_DOWN:
                             right_paddle_velocity = 2;
                             break;
+
+                        case SDLK_p:
+                            game_state = (game_state != GameState_Play) ? GameState_Play : game_state; 
 
                         default:
                             break;
@@ -185,28 +200,49 @@ void run(void)
         if (!running) break;
 
         // Clear the background.
-        render_window(renderer, window);
+        render_screen(renderer, window);
 
-        // Move objects.
-        move_paddle(window, &left_paddle, left_paddle_velocity);
-        move_paddle(window, &right_paddle, right_paddle_velocity);
-        move_ball(&ball, ball_velocity);
-        
-        update_score(window, &ball, &left_score, &right_score);
-        sprintf(left_score_str, "%d", left_score);
-        sprintf(right_score_str, "%d", right_score);
+        switch (game_state)
+        {
+            case GameState_Start:
+                render_text(
+                    renderer, 
+                    window, 
+                    &start_game_rect, 
+                    "./assets/Roboto-Regular.ttf", 
+                    start_game_text, 
+                    24
+                );
+                break;
 
-        collide_ball_walls(window, &ball);
-        collide_ball_paddle(window, &ball, &left_paddle);
-        collide_ball_paddle(window, &ball, &right_paddle);
-        
-        // Game rendering.
-        render_paddle(&left_paddle, renderer);
-        render_paddle(&right_paddle, renderer);
-        render_ball(renderer, window, &ball);
+            case GameState_Play:
+                // Move objects.
+                move_paddle(window, &left_paddle, left_paddle_velocity);
+                move_paddle(window, &right_paddle, right_paddle_velocity);
+                move_ball(&ball, ball_velocity);
+                
+                update_score(window, &ball, &left_score, &right_score);
+                sprintf(left_score_str, "%d", left_score);
+                sprintf(right_score_str, "%d", right_score);
 
-        render_text(renderer, window, &left_score_rect, "./assets/Roboto-Regular.ttf", left_score_str, 24);
-        render_text(renderer, window, &right_score_rect, "./assets/Roboto-Regular.ttf", right_score_str, 24);
+                collide_ball_walls(window, &ball);
+                collide_ball_paddle(window, &ball, &left_paddle);
+                collide_ball_paddle(window, &ball, &right_paddle);
+                
+                // Game rendering.
+                render_board(renderer, window);
+
+                render_paddle(&left_paddle, renderer);
+                render_paddle(&right_paddle, renderer);
+                render_ball(renderer, window, &ball);
+
+                render_text(renderer, window, &left_score_rect, "./assets/Roboto-Regular.ttf", left_score_str, 24);
+                render_text(renderer, window, &right_score_rect, "./assets/Roboto-Regular.ttf", right_score_str, 24);
+                break;
+
+            default: 
+                break;
+        }
 
         // Update the window.
         SDL_RenderPresent(renderer);
