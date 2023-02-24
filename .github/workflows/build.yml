@@ -1,0 +1,39 @@
+name: build
+
+on:
+  workflow_dispatch:
+    push:
+      branches: [main]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+          os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            sudo apt-get update
+            sudo apt-get install libsdl2-dev
+            sudo apt-get install libsdl2-ttf-dev
+          elif [ "$RUNNER_OS" == "macOS" ]; then
+            brew update
+            brew install SDL2
+            brew install SDL2_ttf
+          else
+            echo "$RUNNER_OS not supported"
+
+      - name: Build
+        run: |
+          chmod +x pack.sh
+          ./pack.sh
+
+
+
