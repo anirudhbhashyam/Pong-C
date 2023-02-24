@@ -2,7 +2,7 @@
 
 set -xe
 
-CC=gcc-12
+CC=gcc
 FILE_EXTENSION=c
 CFLAGS="-Wall -Wextra -std=c11 -pedantic"
 PKGS="sdl2"
@@ -17,4 +17,4 @@ if [ $(uname) == "Darwin" ]; then
     PKGS="${PKGS} sdl2_ttf"
 fi 
 
-${CC} ${CFLAGS} -o ${EXECUTABLE} ${SRC} $(pkg-config --cflags --libs ${PKGS})
+${CC} ${CFLAGS} $(pkg-config --cflags ${PKGS}) -o ${EXECUTABLE} ${SRC} $(pkg-config --libs ${PKGS})
