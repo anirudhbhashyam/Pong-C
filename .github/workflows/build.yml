@@ -21,9 +21,8 @@ jobs:
       - name: Install Dependencies
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
-            sudo apt-get update
-            sudo apt-get install libsdl2-dev
-            sudo apt-get install libsdl2-ttf-dev
+            sudo apt install libsdl2-dev libsdl2-2.0-0 -y
+            sudo apt install libfreetype6-dev libsdl2-ttf-dev libsdl2-ttf-2.0-0 -y
           elif [ "$RUNNER_OS" == "macOS" ]; then
             brew update
             brew install SDL2
