@@ -33,10 +33,10 @@ jobs:
         shell: bash
 
       - name: Set PKG_CONFIG_PATH
-        run: export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
+        run: export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/:$PKG_CONFIG_PATH"
 
-      - name: Setup SDL2
-        run: sudo cp -R ./_lib/* /usr/lib/pkgconfig
+      # - name: Setup SDL2
+      #   run: sudo cp -R ./_lib/* /usr/lib/pkgconfig
 
       - name: Build
         run: |
