@@ -29,11 +29,14 @@ jobs:
             brew install SDL2_ttf
           else
             echo "$RUNNER_OS not supported"
+          fi
+        shell: bash
 
       - name: Build
         run: |
           chmod +x pack.sh
           ./pack.sh
+        shell: bash
 
 
 
