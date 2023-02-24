@@ -5,7 +5,8 @@
 #include <SDL2/SDL_ttf.h>
 #include "utils.h"
 
-void render_window(SDL_Renderer*, SDL_Window*);
+void render_screen(SDL_Renderer*, SDL_Window*);
+void render_board(SDL_Renderer*, SDL_Window*);
 void render_text(
     SDL_Renderer*, 
     SDL_Window*,
