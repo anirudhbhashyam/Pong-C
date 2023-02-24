@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+// Do not remove this include. 
+// Utils is used by many other headers.
 #include "vec2i.h"
 
 static inline int32_t sdl_err_handle(int32_t code, const char* reason) 
