@@ -10,10 +10,10 @@ EXECUTABLE="app"
 SRC=$(find "./src" -type f -name "*.c")
 
 if [ $(uname) == "Darwin" ]; then
-    ${PKGS}+=" sdl2_ttf"
+    PKGS="${PKGS} sdl2_ttf"
 fi
 if [ $(uname) == "Linux" ]; then
-    ${PKGS}+=" sdl2-ttf"
+    PKGS="${PKGS} sdl2_ttf"
 fi
 
 ${CC} ${CFLAGS} $(pkg-config --cflags ${PKGS}) -o ${EXECUTABLE} ${SRC} $(pkg-config --libs ${PKGS})
