@@ -13,7 +13,7 @@ if [ $(uname) == "Darwin" ]; then
     PKGS="${PKGS} sdl2_ttf"
 fi
 if [ $(uname) == "Linux" ]; then
-    PKGS="${PKGS} sdl2_ttf"
+    PKGS="${PKGS} sdl2-ttf"
 fi
 
 ${CC} ${CFLAGS} $(pkg-config --cflags ${PKGS}) -o ${EXECUTABLE} ${SRC} $(pkg-config --libs ${PKGS})
