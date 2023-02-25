@@ -64,23 +64,37 @@ void run(void)
         SDL_GetError()
     );
 
-    const char* start_game_text = "Press 'p' to start the game.";
+    // Text init.
+    TTF_Font* font = sdl_err_handle_ptr(
+        TTF_OpenFont("./assets/Roboto-Regular.ttf", 12),
+        TTF_GetError()
+    );
+
+    // Start menu.
     Vec2i start_game_text_pos = vec2i(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    Vec2i start_game_text_dim = vec2i(500, 35);
+    Vec2i start_game_text_dim = vec2i(500, 40);
     SDL_Rect start_game_rect = {
         .x = start_game_text_pos.x - start_game_text_dim.x / 2,
         .y = start_game_text_pos.y - start_game_text_dim.y / 2,
         .w = start_game_text_dim.x,
         .h = start_game_text_dim.y
     };
-    
+
+    TextContainer start_game_text = {
+        .font = font,
+        .rect = start_game_rect,
+        .text = "Press 'p' to start the game.",
+        .size = 24,
+        .color = COLOR_WHITE
+    };
+
+    // Paddles.
     SDL_Rect left_paddle = {
         .x = 0,
         .y = 10,
         .w = 10,
         .h = 50
     };
-   
     SDL_Rect right_paddle = {
         .x = SCREEN_WIDTH - 10,
         .y = 10,
@@ -88,21 +102,18 @@ void run(void)
         .h = 50
     };
 
+    // Scores.
     int32_t left_score = 0;
     int32_t right_score = 0;
-    char left_score_str[50] = { 0 };
-    char right_score_str[50] = { 0 };
 
     Vec2i left_score_pos = vec2i(SCREEN_WIDTH / 2 - 100, 50);
     Vec2i right_score_pos = vec2i(SCREEN_WIDTH / 2 + 100, 50);
-
     SDL_Rect left_score_rect = {
         .x = left_score_pos.x - 50 / 2,
         .y = left_score_pos.y - 50 / 2,
         .w = 50,
         .h = 50
     };
-
     SDL_Rect right_score_rect = {
         .x = right_score_pos.x - 50 / 2,
         .y = right_score_pos.y - 50 / 2,
@@ -110,6 +121,22 @@ void run(void)
         .h = 50
     };
 
+    TextContainer left_score_text = {
+        .font = font,
+        .rect = left_score_rect,
+        .text = "",
+        .size = 24,
+        .color = COLOR_WHITE
+    };
+    TextContainer right_score_text = {
+        .font = font,
+        .rect = right_score_rect,
+        .text = "",
+        .size = 24,
+        .color = COLOR_WHITE
+    };
+
+    // Ball init.
     Vec2i ball_velocity = vec2i(1, 1);
 
     Ball ball = {
@@ -208,10 +235,7 @@ void run(void)
                 render_text(
                     renderer, 
                     window, 
-                    &start_game_rect, 
-                    "./assets/Roboto-Regular.ttf", 
-                    start_game_text, 
-                    24
+                    &start_game_text
                 );
                 break;
 
@@ -222,8 +246,8 @@ void run(void)
                 move_ball(&ball, ball_velocity);
                 
                 update_score(window, &ball, &left_score, &right_score);
-                sprintf(left_score_str, "%d", left_score);
-                sprintf(right_score_str, "%d", right_score);
+                sprintf(left_score_text.text, "%d", left_score);
+                sprintf(right_score_text.text, "%d", right_score);
 
                 collide_ball_walls(window, &ball);
                 collide_ball_paddle(window, &ball, &left_paddle);
@@ -236,8 +260,8 @@ void run(void)
                 render_paddle(&right_paddle, renderer);
                 render_ball(renderer, window, &ball);
 
-                render_text(renderer, window, &left_score_rect, "./assets/Roboto-Regular.ttf", left_score_str, 24);
-                render_text(renderer, window, &right_score_rect, "./assets/Roboto-Regular.ttf", right_score_str, 24);
+                render_text(renderer, window, &left_score_text);
+                render_text(renderer, window, &right_score_text);
                 break;
 
             default: 
@@ -251,4 +275,7 @@ void run(void)
     }
 
     SDL_Quit();
+    TTF_CloseFont(font);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
 }

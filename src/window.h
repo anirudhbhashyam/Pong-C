@@ -7,12 +7,5 @@
 
 void render_screen(SDL_Renderer*, SDL_Window*);
 void render_board(SDL_Renderer*, SDL_Window*);
-void render_text(
-    SDL_Renderer*, 
-    SDL_Window*,
-    SDL_Rect*,
-    const char*,
-    const char*,
-    int32_t
-);
+
 #endif // WINDOW_H
