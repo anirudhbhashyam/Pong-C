@@ -13,5 +13,6 @@ $ ./app
 - `SDL_TTF`
 
 # TODO
-- Add a menu screen.
+- Paddle and ball collision is not perfect. It should be independent of position velocity.
+  Try bv = 4 and pv = 4. Collisions do not happen.
 
