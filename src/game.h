@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <time.h>
 #include <SDL2/SDL.h>
 #include "text.h"
 #include "window.h"
@@ -9,7 +8,7 @@
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
-#define FPS 240
+#define FPS 60
 #define BACKGROUND_COLOR 0x202020
 
 static SDL_Color COLOR_WHITE = {

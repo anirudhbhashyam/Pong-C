@@ -137,7 +137,7 @@ void run(void)
     };
 
     // Ball init.
-    Vec2i ball_velocity = vec2i(1, 1);
+    Vec2i ball_velocity = vec2i(2, 2);
 
     Ball ball = {
         vec2i(400, 300),
@@ -147,6 +147,7 @@ void run(void)
 
     SDL_Event event;
     uint8_t running = 1;
+    int32_t paddle_velocity_mag = 4;
     int32_t left_paddle_velocity = 0;
     int32_t right_paddle_velocity = 0;
 
@@ -171,19 +172,19 @@ void run(void)
                     switch(event.key.keysym.sym) 
                     {
                         case SDLK_w:
-                            left_paddle_velocity = -2;
+                            left_paddle_velocity = -1 * paddle_velocity_mag;
                             break;
 
                         case SDLK_s:
-                            left_paddle_velocity = 2;
+                            left_paddle_velocity = paddle_velocity_mag;
                             break;
 
                         case SDLK_UP:
-                            right_paddle_velocity = -2;
+                            right_paddle_velocity = -1 * paddle_velocity_mag;
                             break;
 
                         case SDLK_DOWN:
-                            right_paddle_velocity = 2;
+                            right_paddle_velocity = paddle_velocity_mag;
                             break;
 
                         case SDLK_p:
