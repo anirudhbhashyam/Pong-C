@@ -21,8 +21,8 @@ jobs:
       - name: Install Dependencies
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
-            sudo apt-get install libsdl2-dev libsdl2-2.0-0 -y
-            sudo apt-get install libfreetype6-dev libsdl2-ttf-dev libsdl2-ttf-2.0-0 -y
+            sudo apt-get install -y libsdl2-dev
+            sudo apt-get install -y libsdl2-ttf-dev
           elif [ "$RUNNER_OS" == "macOS" ]; then
             brew update
             brew install SDL2
@@ -32,8 +32,8 @@ jobs:
           fi
         shell: bash
 
-      - name: Set PKG_CONFIG_PATH
-        run: export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/:$PKG_CONFIG_PATH"
+      # - name: Set PKG_CONFIG_PATH
+      #   run: export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu:$PKG_CONFIG_PATH"
 
       # - name: Setup SDL2
       #   run: sudo cp -R ./_lib/* /usr/lib/pkgconfig
