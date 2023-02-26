@@ -12,10 +12,13 @@ void render_text(
     // Font object may not be the same size as 
     // the font size. Resize it.
 
-    sdl_err_handle(
-        TTF_SetFontSize(text_container->font, text_container->size),
-        TTF_GetError()
-    );
+    if SDL_VERSION_ATLEAST(2, 0, 18)
+    {
+        sdl_err_handle(
+            TTF_SetFontSize(text_container->font, text_container->size),
+            TTF_GetError()
+        );
+    }
 
     SDL_Surface* font_surface = sdl_err_handle_ptr(
         TTF_RenderText_Solid(text_container->font, text_container->text, text_container->color),
