@@ -1,0 +1,18 @@
+name: docker-build
+
+on:
+  workflow_dispatch:
+    push:
+      branches:
+        - main
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Docker Build
+        run: docker build -t pong-c .
