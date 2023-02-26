@@ -4,6 +4,8 @@ A simple implementation of the classic arcade game, Pong, in C.
 ## CI
 ![build](https://www.github.com/anirudhbhashyam/Pong-C/actions/workflows/build.yml/badge.svg)
 
+![docker-build](https://www.github.com/anirudhbhashyam/Pong-C/actions/workflows/docker-build.yml/badge.svg)
+
 # Usage
 
 ## Getting Dependencies
