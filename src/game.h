@@ -11,7 +11,7 @@
 #define FPS 60
 #define BACKGROUND_COLOR 0x202020
 
-static SDL_Color COLOR_WHITE = {
+static const SDL_Color COLOR_WHITE = {
     .r = 255,
     .g = 255,
     .b = 255,
