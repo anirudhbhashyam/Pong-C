@@ -1,6 +1,9 @@
 # Pong-C
 A simple implementation of the classic arcade game, Pong, in C.
 
+## CI
+![build](https://www.github.com/anirudhbhashyam/Pong-C/actions/workflows/build.yml/badge.svg)
+
 # Usage
 ```bash
 $ git clone git@github.com/anirudhbhashyam/Pong-C
