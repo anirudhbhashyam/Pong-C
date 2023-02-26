@@ -26,7 +26,7 @@ $ brew install SDL2_ttf
 ## Running the App
 
 ```bash
-$ git clone git@github.com/anirudhbhashyam/Pong-C
+$ git clone https://www.github.com/anirudhbhashyam/Pong-C
 $ bash pack.sh 
 $ ./app
 ```
