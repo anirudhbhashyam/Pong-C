@@ -12,5 +12,5 @@ COPY . /usr/src/pong-c
 
 WORKDIR /usr/src/pong-c
 
-# RUN bash pack.sh
+RUN bash pack.sh
 
